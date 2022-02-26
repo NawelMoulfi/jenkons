@@ -1,8 +1,6 @@
 pipeline {
 agent any
-   triggers{
-        bitbucketPush()
-    }
+ 
 stages {
 stage ('build') { // la phase build
 steps { // les étapes de la phase build......... // les instructions à exécuter
