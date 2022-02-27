@@ -13,6 +13,11 @@ stages {
              bat 'gradle test'
                }
                     }
+  stage ('documentation') { // la phase test
+          steps {
+             bat 'gradle javadoc'
+               }
+                    }
   
       stage ('deploy') { // la phase deployement
       steps {
