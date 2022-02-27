@@ -1,28 +1,36 @@
 pipeline {
-agent any
- 
-stages {
-     stage ('build') { // la phase build
-           steps { // les étapes de la phase build......... // les instructions à exécuter
-                  bat 'gradle build'
-                  archiveArtifacts 'build/libs/*.jar'
-                  }
-                       }
-      stage ('test') { // la phase test
-          steps {
-             bat 'gradle test'
-               }
-                    }
-  stage ('documentation') { // la phase test
-          steps {
-             bat 'gradle javadoc'
-               }
-                    }
-  
-      stage ('deploy') { // la phase deployement
+  agent any
+  stages {
+    stage('build') {
       steps {
-          bat 'gradle jar'
-          }
-              }
-               }
-                  }
+        bat 'gradle build'
+        archiveArtifacts 'build/libs/*.jar'
+      }
+    }
+
+    stage('test') {
+      steps {
+        bat 'gradle test'
+      }
+    }
+
+    stage('documentation') {
+      steps {
+        bat 'gradle javadoc'
+      }
+    }
+
+    stage('deploy') {
+      steps {
+        bat 'gradle jar'
+      }
+    }
+
+    stage('Slack') {
+      steps {
+        slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'T034DQA2M9V/B034WN5H552/9MGoGcswZsLzRIvF8FQ5LmCd', message: 'slack notification')
+      }
+    }
+
+  }
+}
