@@ -12,7 +12,7 @@ pipeline {
 
         stage('mail') {
           steps {
-            mail(subject: 'notification', body: 'sxioiisx', cc: 'ik_belgherbi@esi.dz', from: 'in_moulfi@esi.dz')
+            mail(subject: 'notification', body: 'sxioiisx', cc: 'ih_merakchi@esi.dz', from: 'in_moulfi@esi.dz')
           }
         }
 
