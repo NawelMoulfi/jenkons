@@ -19,7 +19,7 @@ pipeline {
         bat 'gradle javadoc'
       }
     }
-    stage('Generate HTML report') {
+       stage('Generate HTML report') {
         cucumber buildStatus: 'UNSTABLE',
                 reportTitle: 'My report',
                 fileIncludePattern: '**/*.json',
