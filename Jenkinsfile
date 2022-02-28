@@ -2,9 +2,20 @@ pipeline {
   agent any
   stages {
     stage('build') {
-      steps {
-        bat 'gradle build'
-        archiveArtifacts 'build/libs/*.jar'
+      parallel {
+        stage('build') {
+          steps {
+            bat 'gradle build'
+            archiveArtifacts 'build/libs/*.jar'
+          }
+        }
+
+        stage('mail') {
+          steps {
+            mail(subject: 'notification', body: 'sxioiisx', cc: 'ik_belgherbi@esi.dz', from: 'in_moulfi@esi.dz')
+          }
+        }
+
       }
     }
 
@@ -22,7 +33,7 @@ pipeline {
           }
         }
 
-         stage('Cucumber') {
+        stage('Cucumber') {
           steps {
             cucumber(fileIncludePattern: '**/Cucumber.json', buildStatus: 'Unstable', jsonReportDirectory: 'C:\\Users\\Lenovo\\Desktop\\Nawel')
           }
