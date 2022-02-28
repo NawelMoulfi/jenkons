@@ -22,7 +22,7 @@ pipeline {
           }
         }
 
-        stage('Cucumber') {
+         stage('Cucumber') {
           steps {
             cucumber(fileIncludePattern: '**/Cucumber.json', buildStatus: 'Unstable', jsonReportDirectory: 'C:\\Users\\Lenovo\\Desktop\\Nawel')
           }
