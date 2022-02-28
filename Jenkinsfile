@@ -15,11 +15,21 @@ pipeline {
     }
 
     stage('documentation') {
-      steps {
-        bat 'gradle javadoc'
+      parallel {
+        stage('documentation') {
+          steps {
+            bat 'gradle javadoc'
+          }
+        }
+
+        stage('Cucumber') {
+          steps {
+            cucumber(fileIncludePattern: '**/Cucumber.json', buildStatus: 'Unstable', jsonReportDirectory: 'C:\\Users\\Lenovo\\Desktop\\Nawel')
+          }
+        }
+
       }
     }
-
 
     stage('deploy') {
       steps {
